@@ -18,7 +18,7 @@ import Foundation
 var choose : String?
 var pilihMakanan : String?
 var pilihJumlahMakanan : String?
-var shoppingCart : [0,0,0,0]
+var shoppingCart = [0,0,0,0]
 let catalogueTuku = ["Tahu Isi" , "Nasi Campur" , "Nasi Kuning" , "Air Mineral"]
 let hargaTuku = ["8000" , "12000" , "13000" , "3000"]
 
