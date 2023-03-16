@@ -7,18 +7,15 @@
 
 import Foundation
 
-//var userInput: String = ""
 //
-//print("Your name? ")
-//
-//userInput = readLine()!
-//
-//print("User input: \(userInput)")
-
 var choose : String?
 var pilihMakanan : String?
 var pilihJumlahMakanan : String?
 var pilihMakan: String = ""
+var pilih : String = ""
+var uangUser : Int?
+var change : Int?
+var finish : String?
 
 //array catalogue
 let catalogueTuku = ["Tahu Isi" , "Nasi Campur" , "Nasi Kuning" , "Air Mineral" , "Juice"]
@@ -33,10 +30,9 @@ let catalogueXiangJia = ["kaya toast" , "kaya toast special" , "kopi o" , "teh t
 let hargaXiangJia = [15000 , 18000 , 15000 , 27000 , 18000]
 
 //array cart
-var jumlahCart: [Int] = []
-var hargaCart: [Int] = []
-var namaItemCart: [String] = []
-var namaToko: [String] = []
+//data set
+typealias cart = (shopName: String, namaMenu: String, harga: Int, qty:Int)
+var cartList : [cart] = []
 
 repeat{
     print("""
@@ -54,7 +50,7 @@ repeat{
         Your cafetaria choice ?
         """, terminator: " ")
     choose = readLine()?.lowercased()
-    
+    print()
     if(choose == "1"){
         catalogue(nama:"tuku-tuku")
     } else if (choose == "2"){
@@ -66,37 +62,117 @@ repeat{
     }else if (choose == "5"){
         catalogue(nama:"Xiang Jia")
     }else if (choose == "s"){
-        if jumlahCart.isEmpty && hargaCart.isEmpty && namaItemCart.isEmpty {
+        if cartList.isEmpty {
             print()
             print("Your cart is Empty")
             print()
         }else {
-            var index = 0
-            if namaToko[index] == "tuku-tuku"{
+            repeat{
+                var total : Int = 0
                 
-            }else if namaToko[index] == "Gotri"{
+                for test in 0..<cartList.count{
+                    if cartList[test].shopName == "tuku-tuku" {
+                        print("Your order from Tuku - Tuku :")
+                        for i in 0..<cartList.count {
+                            if cartList[i].shopName == "tuku-tuku"{
+                                print("- ", cartList[i].namaMenu, "x", cartList[i].qty)
+                            }
+                        }
+                        break
+                    }
+                }
+                for test2 in 0..<cartList.count {
+                    if cartList[test2].shopName == "Gotri" {
+                        print("Your order from Gotri :")
+                        for i in 0..<cartList.count {
+                            if cartList[i].shopName == "Gotri"{
+                                print("- ", cartList[i].namaMenu, "x", cartList[i].qty)
+                            }
+                        }
+                        break
+                    }
+                }
+                for test3 in 0..<cartList.count {
+                    if cartList[test3].shopName == "Madam Lie" {
+                        print("Your order from Madam Lie :")
+                        for i in 0..<cartList.count {
+                            if cartList[i].shopName == "Madam Lie"{
+                                print("- ", cartList[i].namaMenu, "x", cartList[i].qty)
+                                }
+                            }
+                        break
+                    }
+                }
+                for test4 in 0..<cartList.count {
+                    if cartList[test4].shopName == "Kopte" {
+                        print("Your order from Kopte :")
+                        for i in 0..<cartList.count {
+                            if cartList[i].shopName == "Kopte"{
+                                print("- ", cartList[i].namaMenu, "x", cartList[i].qty)
+                            }
+                        }
+                        break
+                    }
+                }
+                for test5 in 0..<cartList.count {
+                    if cartList[test5].shopName == "Xiang Jia" {
+                        print("Your order from Xiang Jia :")
+                        for i in 0..<cartList.count {
+                            if cartList[i].shopName == "Xiang Jia"{
+                                print("- ", cartList[i].namaMenu, "x", cartList[i].qty)
+                            }
+                        }
+                        break
+                    }
+                }
                 
-            }else if namaToko[index] == "Madam Lie"{
+                print("""
+                      Press [B] to go back
+                      Press [S] to pay / checkout
+                      Your choice ?
+                      """, terminator: "")
+                choose = readLine()?.lowercased()
+                print()
                 
-            }else if namaToko[index] == "Kopte"{
-                
-            }else if namaToko[index] == "Xiang Jia"{
-                
-            }
-//            if tempat == "tuku-tuku" {
-//                print("Your order from tuku - tuku : ")
-//                print("-", namaItemCart[index], "x", jumlahCart[index])
-//                index+=1
-//                print()
-//            }else if tempat == "Gotri" {
-//
-//            }else if tempat == "Madam Lie" {
-//
-//            }else if tempat == "Kopte" {
-//
-//            }else if tempat == "Xiang Jia" {
-//
-//            }
+                if choose == "s" {
+                    for co in 0..<cartList.count {
+                        total += (cartList[co].harga * cartList[co].qty)
+                    }
+                    print("Your total order : \(total)")
+                    print("Enter the amount of your money : " , terminator: "")
+                    pilih = readLine()!.lowercased()
+                    if let _ = Int(pilih){
+                        if Int(pilih) ?? 0 < 0 {
+                            print("please enter a valid amount")
+                        } else if Int(pilih) ?? 0 < total{
+                            print("your money is not enough")
+                        }else if Int(pilih) ?? 0 >= total{
+                            uangUser = Int(pilih)
+                            change = uangUser! - total
+                            print("""
+                                Your total order : \(total)
+                                You pay : \(uangUser ?? 0)
+                                your change : \(change ?? 0)
+                                
+                                Enjoy your meals!
+                                press [return] to go back to main screen :
+                                """, terminator: "")
+                            finish = readLine()?.lowercased()
+                            
+                            if finish == "" {
+                                cartList.removeAll()
+                                break
+                            }else {
+                                print("Error Input")
+                            }
+                        }
+                    }else if pilih == "" {
+                        print("please enter your payment")
+                    }else {
+                        print("Please enter a valid amount")
+                    }
+                }
+            } while choose != "b"
         }
     }
 }while choose != "q"
@@ -123,21 +199,23 @@ public func catalogue(nama: String){
             """, terminator: " ")
             pilihMakan = readLine()!.lowercased()
             if let _ = Int(pilihMakan) {
-                pilihMakanan = pilihMakan
-                print()
-                print(catalogueTuku[(Int(pilihMakanan!)!)-1] , hargaTuku[(Int(pilihMakanan!)!)-1])
-                print()
-                print("How many",catalogueTuku[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
-                
-                let pilihJumlahMakan = readLine()?.lowercased()
-                if let intJumlah = Int(pilihJumlahMakan!){
-                    jumlahCart.append(intJumlah)
-                    namaItemCart.append(catalogueTuku[(Int(pilihMakanan!)!)-1])
-                    hargaCart.append(hargaTuku[(Int(pilihMakanan!)!)-1])
-                    namaToko.append(nama)
-                    break
-                } else {
-                    print("Input Must Number")
+                // error handling
+                if Int(pilihMakan) ?? 0 > catalogueTuku.count {
+                    print("menu tidak ada")
+                }else{
+                    pilihMakanan = pilihMakan
+                    print()
+                    print(catalogueTuku[(Int(pilihMakanan!)!)-1] , hargaTuku[(Int(pilihMakanan!)!)-1])
+                    print()
+                    print("How many",catalogueTuku[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
+                    
+                    let pilihJumlahMakan = readLine()?.lowercased()
+                    if let intJumlah = Int(pilihJumlahMakan!){
+                        buy(shopName: nama,namaMenu: catalogueTuku[(Int(pilihMakanan!)!)-1],harga: hargaTuku[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                        break
+                    } else {
+                        print("Input Must Number")
+                    }
                 }
             }else {
                 print("invalid input")
@@ -165,10 +243,7 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    jumlahCart.append(intJumlah)
-                    namaItemCart.append(catalogueGotri[(Int(pilihMakanan!)!)-1])
-                    hargaCart.append(hargaGotri[(Int(pilihMakanan!)!)-1])
-                    namaToko.append(nama)
+                    buy(shopName: nama,namaMenu: catalogueGotri[(Int(pilihMakanan!)!)-1],harga: hargaGotri[(Int(pilihMakanan!)!)-1], qty: intJumlah)
                     break
                 }else{
                     print("Input Must Number")
@@ -199,10 +274,7 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    jumlahCart.append(intJumlah)
-                    namaItemCart.append(catalogueMadamLie[(Int(pilihMakanan!)!)-1])
-                    hargaCart.append(hargaMadamLie[(Int(pilihMakanan!)!)-1])
-                    namaToko.append(nama)
+                    buy(shopName: nama,namaMenu: catalogueMadamLie[(Int(pilihMakanan!)!)-1],harga: hargaMadamLie[(Int(pilihMakanan!)!)-1], qty: intJumlah)
                     break
                 }else{
                     print("Input Must Number")
@@ -233,10 +305,7 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    jumlahCart.append(intJumlah)
-                    namaItemCart.append(catalogueKopte[(Int(pilihMakanan!)!)-1])
-                    hargaCart.append(hargaKopte[(Int(pilihMakanan!)!)-1])
-                    namaToko.append(nama)
+                    buy(shopName: nama,namaMenu: catalogueKopte[(Int(pilihMakanan!)!)-1],harga: hargaKopte[(Int(pilihMakanan!)!)-1], qty: intJumlah)
                     break
                 }else{
                     print("Input Must Number")
@@ -267,10 +336,7 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    jumlahCart.append(intJumlah)
-                    namaItemCart.append(catalogueXiangJia[(Int(pilihMakanan!)!)-1])
-                    hargaCart.append(hargaXiangJia[(Int(pilihMakanan!)!)-1])
-                    namaToko.append(nama)
+                    buy(shopName: nama,namaMenu: catalogueXiangJia[(Int(pilihMakanan!)!)-1],harga: hargaXiangJia[(Int(pilihMakanan!)!)-1], qty: intJumlah)
                     break
                 }else{
                     print("Input Must Number")
@@ -284,6 +350,19 @@ public func catalogue(nama: String){
     }
 }
 
+public func buy(shopName: String, namaMenu: String, harga: Int, qty:Int){
+    let tempOrder : cart = (shopName, namaMenu, harga, qty)
+    var check = false
+    for (index, _) in cartList.enumerated(){
+         if cartList[index].shopName == tempOrder.shopName && cartList[index].namaMenu == tempOrder.namaMenu {
+             cartList[index].qty += tempOrder.qty
+             check = true
+        }
+    }
+    if(!check){
+        cartList.append(tempOrder)
+    }
+}
 
 //print("Hi, Welcome back to Tuku - tuku!")
 //print("What would you like to order?")
