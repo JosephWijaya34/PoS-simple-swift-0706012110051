@@ -135,45 +135,63 @@ repeat{
                 print()
                 
                 if choose == "s" {
-                    for co in 0..<cartList.count {
-                        total += (cartList[co].harga * cartList[co].qty)
-                    }
-                    print("Your total order : \(total)")
-                    print("Enter the amount of your money : " , terminator: "")
-                    pilih = readLine()!.lowercased()
-                    if let _ = Int(pilih){
-                        if Int(pilih) ?? 0 < 0 {
-                            print("please enter a valid amount")
-                        } else if Int(pilih) ?? 0 < total{
-                            print("your money is not enough")
-                        }else if Int(pilih) ?? 0 >= total{
-                            uangUser = Int(pilih)
-                            change = uangUser! - total
-                            print("""
-                                Your total order : \(total)
-                                You pay : \(uangUser ?? 0)
-                                your change : \(change ?? 0)
-                                
-                                Enjoy your meals!
-                                press [return] to go back to main screen :
-                                """, terminator: "")
-                            finish = readLine()?.lowercased()
-                            
-                            if finish == "" {
-                                cartList.removeAll()
-                                break
-                            }else {
-                                print("Error Input")
-                            }
+                    repeat{
+                        for co in 0..<cartList.count {
+                            total += (cartList[co].harga * cartList[co].qty)
                         }
-                    }else if pilih == "" {
-                        print("please enter your payment")
-                    }else {
-                        print("Please enter a valid amount")
-                    }
+                        print("Your total order : \(total)")
+                        print("Enter the amount of your money : " , terminator: "")
+                        pilih = readLine()!.lowercased()
+                        if let _ = Int(pilih){
+                            if Int(pilih) ?? 0 < 0 {
+                                total = 0
+                                print("please enter a valid amount")
+                            } else if Int(pilih) ?? 0 < total{
+                                total = 0
+                                print("your money is not enough")
+                            }else if Int(pilih) ?? 0 >= total{
+                                repeat{
+                                    uangUser = Int(pilih)
+                                    change = uangUser! - total
+                                    print("""
+                                        Your total order : \(total)
+                                        You pay : \(uangUser ?? 0)
+                                        your change : \(change ?? 0)
+                                        
+                                        Enjoy your meals!
+                                        press [return] to go back to main screen :
+                                        """, terminator: "")
+                                    finish = readLine()?.lowercased()
+                                    
+                                    if finish == "" {
+                                        cartList.removeAll()
+                                        choose = "b"
+                                        break
+                                    }else {
+                                        print("Error Input")
+                                    }
+                                } while finish != ""
+                                break
+                            }
+                        }else if pilih == "" {
+                            total = 0
+                            print("please enter your payment")
+                        }else {
+                            total = 0
+                            print("Please enter a valid amount")
+                        }
+                    } while pilih != "Quit"
+                }else if choose == "b" {
+                    break
+                } else {
+                    print("Invalid Input")
                 }
             } while choose != "b"
         }
+    }else if choose == "q" {
+        exit(0)
+    }else{
+        print("Invalid input or store not found")
     }
 }while choose != "q"
 
@@ -211,8 +229,12 @@ public func catalogue(nama: String){
                     
                     let pilihJumlahMakan = readLine()?.lowercased()
                     if let intJumlah = Int(pilihJumlahMakan!){
-                        buy(shopName: nama,namaMenu: catalogueTuku[(Int(pilihMakanan!)!)-1],harga: hargaTuku[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                        break
+                        if intJumlah <= 0 {
+                            print("input cant be 0 or less")
+                        }else {
+                            buy(shopName: nama,namaMenu: catalogueTuku[(Int(pilihMakanan!)!)-1],harga: hargaTuku[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                            break
+                        }
                     } else {
                         print("Input Must Number")
                     }
@@ -243,8 +265,12 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    buy(shopName: nama,namaMenu: catalogueGotri[(Int(pilihMakanan!)!)-1],harga: hargaGotri[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                    break
+                    if intJumlah <= 0 {
+                        print("input cant be 0 or less")
+                    }else {
+                        buy(shopName: nama,namaMenu: catalogueGotri[(Int(pilihMakanan!)!)-1],harga: hargaGotri[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                        break
+                    }
                 }else{
                     print("Input Must Number")
                 }
@@ -274,8 +300,11 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    buy(shopName: nama,namaMenu: catalogueMadamLie[(Int(pilihMakanan!)!)-1],harga: hargaMadamLie[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                    break
+                    if intJumlah <= 0 {
+                        print("input cant be 0 or less")
+                    }else {
+                        buy(shopName: nama,namaMenu: catalogueMadamLie[(Int(pilihMakanan!)!)-1],harga: hargaMadamLie[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                        break                    }
                 }else{
                     print("Input Must Number")
                 }
@@ -305,8 +334,12 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    buy(shopName: nama,namaMenu: catalogueKopte[(Int(pilihMakanan!)!)-1],harga: hargaKopte[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                    break
+                    if intJumlah <= 0 {
+                        print("input cant be 0 or less")
+                    }else {
+                        buy(shopName: nama,namaMenu: catalogueKopte[(Int(pilihMakanan!)!)-1],harga: hargaKopte[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                        break
+                    }
                 }else{
                     print("Input Must Number")
                 }
@@ -336,8 +369,12 @@ public func catalogue(nama: String){
                 
                 let pilihJumlahMakan = readLine()?.lowercased()
                 if let intJumlah = Int(pilihJumlahMakan!){
-                    buy(shopName: nama,namaMenu: catalogueXiangJia[(Int(pilihMakanan!)!)-1],harga: hargaXiangJia[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                    break
+                    if intJumlah <= 0 {
+                        print("input cant be 0 or less")
+                    }else {
+                        buy(shopName: nama,namaMenu: catalogueXiangJia[(Int(pilihMakanan!)!)-1],harga: hargaXiangJia[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                        break
+                    }
                 }else{
                     print("Input Must Number")
                 }
