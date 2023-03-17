@@ -7,7 +7,7 @@
 
 import Foundation
 
-//
+// variable
 var choose : String?
 var pilihMakanan : String?
 var pilihJumlahMakanan : String?
@@ -34,6 +34,7 @@ let hargaXiangJia = [15000 , 18000 , 15000 , 27000 , 18000]
 typealias cart = (shopName: String, namaMenu: String, harga: Int, qty:Int)
 var cartList : [cart] = []
 
+// Main data
 repeat{
     print("""
         welcome to UC-walk Cafetaria 👨🏻‍🍳👩🏻‍🍳
@@ -195,8 +196,7 @@ repeat{
     }
 }while choose != "q"
 
-
-
+// function menu
 public func catalogue(nama: String){
     print("Hi, Welcome back to ", nama , "!")
     print("What would you like to order?")
@@ -257,22 +257,27 @@ public func catalogue(nama: String){
             """, terminator: " ")
             pilihMakan = readLine()!.lowercased()
             if let _ = Int(pilihMakan) {
-                pilihMakanan = pilihMakan
-                print()
-                print(catalogueGotri[(Int(pilihMakanan!)!)-1] , hargaGotri[(Int(pilihMakanan!)!)-1])
-                print()
-                print("How many",catalogueGotri[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
-                
-                let pilihJumlahMakan = readLine()?.lowercased()
-                if let intJumlah = Int(pilihJumlahMakan!){
-                    if intJumlah <= 0 {
-                        print("input cant be 0 or less")
-                    }else {
-                        buy(shopName: nama,namaMenu: catalogueGotri[(Int(pilihMakanan!)!)-1],harga: hargaGotri[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                        break
-                    }
+                // error handling
+                if Int(pilihMakan) ?? 0 > catalogueGotri.count {
+                    print("menu tidak ada")
                 }else{
-                    print("Input Must Number")
+                    pilihMakanan = pilihMakan
+                    print()
+                    print(catalogueGotri[(Int(pilihMakanan!)!)-1] , hargaGotri[(Int(pilihMakanan!)!)-1])
+                    print()
+                    print("How many",catalogueGotri[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
+                    
+                    let pilihJumlahMakan = readLine()?.lowercased()
+                    if let intJumlah = Int(pilihJumlahMakan!){
+                        if intJumlah <= 0 {
+                            print("input cant be 0 or less")
+                        }else {
+                            buy(shopName: nama,namaMenu: catalogueGotri[(Int(pilihMakanan!)!)-1],harga: hargaGotri[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                            break
+                        }
+                    }else{
+                        print("Input Must Number")
+                    }
                 }
             } else {
                 print("invalid input")
@@ -292,21 +297,26 @@ public func catalogue(nama: String){
             """, terminator: " ")
             pilihMakan = readLine()!.lowercased()
             if let _ = Int(pilihMakan) {
-                pilihMakanan = pilihMakan
-                print()
-                print(catalogueMadamLie[(Int(pilihMakanan!)!)-1] , hargaMadamLie[(Int(pilihMakanan!)!)-1])
-                print()
-                print("How many",catalogueMadamLie[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
-                
-                let pilihJumlahMakan = readLine()?.lowercased()
-                if let intJumlah = Int(pilihJumlahMakan!){
-                    if intJumlah <= 0 {
-                        print("input cant be 0 or less")
-                    }else {
-                        buy(shopName: nama,namaMenu: catalogueMadamLie[(Int(pilihMakanan!)!)-1],harga: hargaMadamLie[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                        break                    }
+                // error handling
+                if Int(pilihMakan) ?? 0 > catalogueMadamLie.count {
+                    print("menu tidak ada")
                 }else{
-                    print("Input Must Number")
+                    pilihMakanan = pilihMakan
+                    print()
+                    print(catalogueMadamLie[(Int(pilihMakanan!)!)-1] , hargaMadamLie[(Int(pilihMakanan!)!)-1])
+                    print()
+                    print("How many",catalogueMadamLie[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
+
+                    let pilihJumlahMakan = readLine()?.lowercased()
+                    if let intJumlah = Int(pilihJumlahMakan!){
+                        if intJumlah <= 0 {
+                            print("input cant be 0 or less")
+                        }else {
+                            buy(shopName: nama,namaMenu: catalogueMadamLie[(Int(pilihMakanan!)!)-1],harga: hargaMadamLie[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                            break                    }
+                    }else{
+                        print("Input Must Number")
+                    }
                 }
             } else {
                 print("invalid input")
@@ -326,22 +336,27 @@ public func catalogue(nama: String){
             """, terminator: " ")
             pilihMakan = readLine()!.lowercased()
             if let _ = Int(pilihMakan) {
-                pilihMakanan = pilihMakan
-                print()
-                print(catalogueKopte[(Int(pilihMakanan!)!)-1] , hargaKopte[(Int(pilihMakanan!)!)-1])
-                print()
-                print("How many",catalogueKopte[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
-                
-                let pilihJumlahMakan = readLine()?.lowercased()
-                if let intJumlah = Int(pilihJumlahMakan!){
-                    if intJumlah <= 0 {
-                        print("input cant be 0 or less")
-                    }else {
-                        buy(shopName: nama,namaMenu: catalogueKopte[(Int(pilihMakanan!)!)-1],harga: hargaKopte[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                        break
-                    }
+                // error handling
+                if Int(pilihMakan) ?? 0 > catalogueKopte.count {
+                    print("menu tidak ada")
                 }else{
-                    print("Input Must Number")
+                    pilihMakanan = pilihMakan
+                    print()
+                    print(catalogueKopte[(Int(pilihMakanan!)!)-1] , hargaKopte[(Int(pilihMakanan!)!)-1])
+                    print()
+                    print("How many",catalogueKopte[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
+                    
+                    let pilihJumlahMakan = readLine()?.lowercased()
+                    if let intJumlah = Int(pilihJumlahMakan!){
+                        if intJumlah <= 0 {
+                            print("input cant be 0 or less")
+                        }else {
+                            buy(shopName: nama,namaMenu: catalogueKopte[(Int(pilihMakanan!)!)-1],harga: hargaKopte[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                            break
+                        }
+                    }else{
+                        print("Input Must Number")
+                    }
                 }
             } else {
                 print("invalid input")
@@ -361,22 +376,27 @@ public func catalogue(nama: String){
             """, terminator: " ")
             pilihMakan = readLine()!.lowercased()
             if let _ = Int(pilihMakan) {
-                pilihMakanan = pilihMakan
-                print()
-                print(catalogueXiangJia[(Int(pilihMakanan!)!)-1] , hargaXiangJia[(Int(pilihMakanan!)!)-1])
-                print()
-                print("How many",catalogueXiangJia[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
-                
-                let pilihJumlahMakan = readLine()?.lowercased()
-                if let intJumlah = Int(pilihJumlahMakan!){
-                    if intJumlah <= 0 {
-                        print("input cant be 0 or less")
-                    }else {
-                        buy(shopName: nama,namaMenu: catalogueXiangJia[(Int(pilihMakanan!)!)-1],harga: hargaXiangJia[(Int(pilihMakanan!)!)-1], qty: intJumlah)
-                        break
-                    }
+                // error handling
+                if Int(pilihMakan) ?? 0 > catalogueXiangJia.count {
+                    print("menu tidak ada")
                 }else{
-                    print("Input Must Number")
+                    pilihMakanan = pilihMakan
+                    print()
+                    print(catalogueXiangJia[(Int(pilihMakanan!)!)-1] , hargaXiangJia[(Int(pilihMakanan!)!)-1])
+                    print()
+                    print("How many",catalogueXiangJia[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
+                    
+                    let pilihJumlahMakan = readLine()?.lowercased()
+                    if let intJumlah = Int(pilihJumlahMakan!){
+                        if intJumlah <= 0 {
+                            print("input cant be 0 or less")
+                        }else {
+                            buy(shopName: nama,namaMenu: catalogueXiangJia[(Int(pilihMakanan!)!)-1],harga: hargaXiangJia[(Int(pilihMakanan!)!)-1], qty: intJumlah)
+                            break
+                        }
+                    }else{
+                        print("Input Must Number")
+                    }
                 }
             }else if pilihMakan == "b" {
                 
@@ -387,6 +407,7 @@ public func catalogue(nama: String){
     }
 }
 
+// function cart
 public func buy(shopName: String, namaMenu: String, harga: Int, qty:Int){
     let tempOrder : cart = (shopName, namaMenu, harga, qty)
     var check = false
@@ -400,39 +421,3 @@ public func buy(shopName: String, namaMenu: String, harga: Int, qty:Int){
         cartList.append(tempOrder)
     }
 }
-
-//print("Hi, Welcome back to Tuku - tuku!")
-//print("What would you like to order?")
-//print()
-//var i = 0
-//for makanan in catalogueTuku {
-//    print("[",1 + i,"]" , makanan)
-//    i+=1
-//}
-//print("""
-//[B]ack to Main Menu
-//
-//Your menu choice ?
-//""", terminator: " ")
-//
-//
-//let pilihMakan = readLine()?.lowercased()
-//if let _ = Int(pilihMakan!) {
-//    pilihMakanan = pilihMakan
-//    print()
-//    print(catalogueTuku[(Int(pilihMakanan!)!)-1] , hargaTuku[(Int(pilihMakanan!)!)-1])
-//    print()
-//    print("How many",catalogueTuku[(Int(pilihMakanan!)!)-1] ,"do you want to buy? ", terminator: " ")
-//
-//    let pilihJumlahMakan = readLine()?.lowercased()
-//    if let _ = Int(pilihJumlahMakan!){
-//        pilihJumlahMakanan = pilihJumlahMakan
-//
-//    }else{
-//        print("Input Must Number")
-//    }
-//}else if pilihMakan == "b" {
-//
-//} else {
-//    print("invalid input")
-//}
