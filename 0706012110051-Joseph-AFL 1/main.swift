@@ -85,70 +85,80 @@ repeat{
     case "s":
         repeat{
             showCart()
-            print("""
-                Press [B] to go back
-                Press [S] to pay / checkout
-                Your choice ?
-                """, terminator: " ")
+            shoppingCart.pemanisTampilanCart()
+//            print("""
+//                Press [B] to go back
+//                Press [S] to pay / checkout
+//                Your choice ?
+//                """, terminator: " ")
             choose = readLine()?.lowercased()
             print()
-            switch choose {
-            case "s":
-                repeat{
-                    totalBelanjaan = shoppingCart.totalBelanjaan()
-                    print("""
-                        Your total order : Rp. \(totalBelanjaan)
-                        Enter the amount of your money :
-                        """, terminator: " ")
-                    pilih = readLine()!.lowercased()
-                    if let _ = Int(pilih){
-                        if Int(pilih) ?? 0 < 0 {
-                            print("please enter a valid amount")
-                        } else if Int(pilih) ?? 0 < totalBelanjaan{
-                            print("your money is not enough")
-                        }else if Int(pilih) ?? 0 >= totalBelanjaan{
-                            repeat{
-                                uangUser = Int(pilih)
-                                change = uangUser! - totalBelanjaan
-                                print("""
-                                    Your total order : \(totalBelanjaan)
-                                    You pay : \(uangUser ?? 0)
-                                    your change : \(change ?? 0)
-                                                            
-                                    Enjoy your meals!
-                                    press [return] to go back to main screen :
-                                    """, terminator: " ")
-                                finish = readLine()?.lowercased() ?? ""
-                                
-                                if finish == "" {
-                                    choose = "b"
-                                    shoppingCart.reset()
-                                    break
+            if shoppingCart.listItem.isEmpty{
+                switch choose {
+                case "b":
+                    break
+                default:
+                    print("Invalid Input")
+                }
+            }else{
+                switch choose {
+                case "s":
+                    repeat{
+                        totalBelanjaan = shoppingCart.totalBelanjaan()
+                        print("""
+                            Your total order : Rp. \(totalBelanjaan)
+                            Enter the amount of your money :
+                            """, terminator: " ")
+                        pilih = readLine()!.lowercased()
+                        if let _ = Int(pilih){
+                            if Int(pilih) ?? 0 < 0 {
+                                print("please enter a valid amount")
+                            } else if Int(pilih) ?? 0 < totalBelanjaan{
+                                print("your money is not enough")
+                            }else if Int(pilih) ?? 0 >= totalBelanjaan{
+                                repeat{
+                                    uangUser = Int(pilih)
+                                    change = uangUser! - totalBelanjaan
+                                    print("""
+                                        Your total order : \(totalBelanjaan)
+                                        You pay : \(uangUser ?? 0)
+                                        your change : \(change ?? 0)
+                                                                
+                                        Enjoy your meals!
+                                        press [return] to go back to main screen :
+                                        """, terminator: " ")
+                                    finish = readLine()?.lowercased() ?? ""
+                                    
+                                    if finish == "" {
+                                        choose = "b"
+                                        shoppingCart.reset()
+                                        break
+                                    }else {
+                                        print("Error Input")
+                                    }
+                                } while finish != ""
+                                        break
+                                    }
+                                }else if pilih == "" {
+                                print("please enter your payment")
                                 }else {
-                                    print("Error Input")
+                                print("Please enter a valid amount")
                                 }
-                            } while finish != ""
-                                    break
-                                }
-                            }else if pilih == "" {
-                            print("please enter your payment")
-                            }else {
-                            print("Please enter a valid amount")
-                            }
-                }while pilih != "Quit"
-            case "b":
-                break
-            default:
-                print("invalid Input")
+                    }while pilih != "Quit"
+                case "b":
+                    break
+                default:
+                    print("invalid Input")
+                }
             }
         }while choose != "b"
     case "q":
+        print("Come back soon!")
         exit(0)
     default:
         print("Invalid input or store not found")
         print()
     }
-
 }while choose != "q"
 
 
@@ -157,71 +167,85 @@ repeat{
 
 //function main
 public func catalogueMenu (_ namaToko: String){
-    // pindah array
-    for makanan in menuMakanan{
-        if makanan.namaShop == namaToko{
-            showStoreMenu.append(makanan)
+    repeat{
+        showStoreMenu.removeAll()
+        // pindah array
+        for makanan in menuMakanan{
+            if makanan.namaShop == namaToko{
+                showStoreMenu.append(makanan)
+            }
         }
-    }
-    print("""
-        Hi Welcome back to \(namaToko)!
-        What would you like to order?
-        
-        """)
-    x = 0
-    for i in showStoreMenu{
-        if i.namaShop == namaToko{
-            print("[\(x + 1)] \(i.namaMakanan)")
-            x += 1
-        }
-    }
-    print("""
-        -
-        [B]ack to Main Menu
-        Your Menu Choice ?
-        """ , terminator: " ")
-    pilihMakan = readLine()!.lowercased()
-    print()
-    if let _ = Int(pilihMakan) {
-        if Int(pilihMakan) ?? 0 > showStoreMenu.count{
-            print("Menu tidak tersedia")
-        }else{
-            print("""
-                \(showStoreMenu[(Int(pilihMakan)!)-1].namaMakanan) @ \(showStoreMenu[(Int(pilihMakan)!)-1].harga)
-                How many \(showStoreMenu[(Int(pilihMakan)!)-1].namaMakanan) do you want to buy ?
-                """, terminator: " ")
+        print("""
+            Hi Welcome back to \(namaToko)!
+            What would you like to order?
             
-            let pilihJumlahMakan = readLine()?.lowercased()
-            if let intJumlah = Int(pilihJumlahMakan!){
-                if intJumlah <= 0 {
-                    print("input cant be 0 or less")
-                }else {
-                    
-                    //simpan data sementara
-                    let namaMakanan = showStoreMenu[(Int(pilihMakan)!)-1].namaMakanan
-                    let hargaMakanan = showStoreMenu[(Int(pilihMakan)!)-1].harga
-                    let namaToko = showStoreMenu[(Int(pilihMakan)!)-1].namaShop
-                    let qty = intJumlah
-                    
-                    shoppingCart.addItem(Item(namaMakanan, hargaMakanan, namaToko, qty))
-                    print("Thank you for ordering.")
-                    print()
-                    showStoreMenu.removeAll()
-                }
-            } else {
-                print("Input Must Number")
-                }
+            """)
+        x = 0
+        for i in showStoreMenu{
+            if i.namaShop == namaToko{
+                print("[\(x + 1)] \(i.namaMakanan)")
+                x += 1
+            }
         }
-    }
-    
+        print("""
+            -
+            [B]ack to Main Menu
+            Your Menu Choice ?
+            """ , terminator: " ")
+        pilihMakan = readLine()!.lowercased()
+        print()
+        if let _ = Int(pilihMakan) {
+            if Int(pilihMakan) ?? 0 > showStoreMenu.count{
+                print("Menu tidak tersedia")
+            }else{
+                repeat{
+                    print("""
+                        \(showStoreMenu[(Int(pilihMakan)!)-1].namaMakanan) @ \(showStoreMenu[(Int(pilihMakan)!)-1].harga)
+                        How many \(showStoreMenu[(Int(pilihMakan)!)-1].namaMakanan) do you want to buy ?
+                        """, terminator: " ")
+                    
+                    let pilihJumlahMakan = readLine()?.lowercased()
+                    if let intJumlah = Int(pilihJumlahMakan!){
+                        if intJumlah <= 0 {
+                            print("input cant be 0 or less")
+                        }else {
+                            
+                            //simpan data sementara
+                            let namaMakanan = showStoreMenu[(Int(pilihMakan)!)-1].namaMakanan
+                            let hargaMakanan = showStoreMenu[(Int(pilihMakan)!)-1].harga
+                            let namaToko = showStoreMenu[(Int(pilihMakan)!)-1].namaShop
+                            let qty = intJumlah
+                            
+                            shoppingCart.addItem(Item(namaMakanan, hargaMakanan, namaToko, qty))
+                            print("Thank you for ordering.")
+                            print()
+                            showStoreMenu.removeAll()
+                            break
+                        }
+                    } else {
+                        print("Input Must Number")
+                        print()
+                    }
+                }while pilihMakan != "b"
+                break
+            }
+        }else if pilihMakan == ""{
+            print("Input can't be empty")
+            print()
+        }else{
+            print("Invalid Input")
+            print()
+        }
+    }while pilihMakan != "b"
 }
 
 // function show shopping cart
 func showCart()  {
     if shoppingCart.listItem.isEmpty {
-            print("Your cart is empty.")
-            print()
-        }
+        print("Your cart is empty.")
+        print()
+    }
+    
     var storeCart: [String: [String: Int]] = [:]
     for item in shoppingCart.listItem {
         if storeCart[item.namaShop] == nil {

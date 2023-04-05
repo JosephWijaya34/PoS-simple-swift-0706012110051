@@ -58,5 +58,17 @@ public class Cart: CartFunction {
         return totalPesanan
     }
     
-    
+    func pemanisTampilanCart(){
+        if listItem.isEmpty{
+            print("""
+                Press [B] to go back :
+                """, terminator: " ")
+        }else{
+            print("""
+                Press [B] to go back
+                Press [S] to pay / checkout
+                Your choice ?
+                """, terminator: " ")
+        }
+    }
 }
