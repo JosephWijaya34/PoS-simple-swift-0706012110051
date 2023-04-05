@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		044D5F4429ADA1360008D117 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D5F4329ADA1360008D117 /* main.swift */; };
+		044D5F4B29D675030008D117 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D5F4A29D675030008D117 /* Menu.swift */; };
+		044D5F4D29D681C90008D117 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D5F4C29D681C90008D117 /* Item.swift */; };
+		044D5F5529DB03EE0008D117 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D5F5429DB03EE0008D117 /* Cart.swift */; };
+		044D5F5729DB04080008D117 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044D5F5629DB04080008D117 /* Shop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,10 @@
 /* Begin PBXFileReference section */
 		044D5F4029ADA1360008D117 /* 0706012110051-Joseph-AFL 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "0706012110051-Joseph-AFL 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		044D5F4329ADA1360008D117 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		044D5F4A29D675030008D117 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		044D5F4C29D681C90008D117 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		044D5F5429DB03EE0008D117 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		044D5F5629DB04080008D117 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,10 @@
 			isa = PBXGroup;
 			children = (
 				044D5F4329ADA1360008D117 /* main.swift */,
+				044D5F4A29D675030008D117 /* Menu.swift */,
+				044D5F4C29D681C90008D117 /* Item.swift */,
+				044D5F5429DB03EE0008D117 /* Cart.swift */,
+				044D5F5629DB04080008D117 /* Shop.swift */,
 			);
 			path = "0706012110051-Joseph-AFL 1";
 			sourceTree = "<group>";
@@ -120,6 +132,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044D5F4B29D675030008D117 /* Menu.swift in Sources */,
+				044D5F4D29D681C90008D117 /* Item.swift in Sources */,
+				044D5F5529DB03EE0008D117 /* Cart.swift in Sources */,
+				044D5F5729DB04080008D117 /* Shop.swift in Sources */,
 				044D5F4429ADA1360008D117 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
