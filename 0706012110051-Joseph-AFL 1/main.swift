@@ -86,11 +86,6 @@ repeat{
         repeat{
             showCart()
             shoppingCart.pemanisTampilanCart()
-//            print("""
-//                Press [B] to go back
-//                Press [S] to pay / checkout
-//                Your choice ?
-//                """, terminator: " ")
             choose = readLine()?.lowercased()
             print()
             if shoppingCart.listItem.isEmpty{
