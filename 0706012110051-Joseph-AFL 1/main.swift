@@ -222,7 +222,6 @@ public func catalogueMenu (_ namaToko: String){
                         print()
                     }
                 }while pilihMakan != "b"
-                break
             }
         }else if pilihMakan == ""{
             print("Input can't be empty")
